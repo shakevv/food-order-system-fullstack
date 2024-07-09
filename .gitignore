@@ -44,3 +44,4 @@
 # Environment
 **/.env
 **/environment
+**/environments

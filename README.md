@@ -31,4 +31,4 @@ There are two types of users - Anonymous (Unauthenticated) and Moderators (Authe
 - Preview & Create Order;
 - Login;
 - Manage Orders;
-- Manage Users;
+- Manage Users.

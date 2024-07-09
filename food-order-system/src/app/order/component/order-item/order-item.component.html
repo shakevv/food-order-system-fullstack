@@ -1,0 +1,46 @@
+<mat-expansion-panel>
+    <mat-expansion-panel-header>
+        <mat-panel-title>
+            <div class="row ">
+                <div class="col-lg-2">
+                    {{index}}.
+                    <mat-icon *ngIf="order.status === 'Finished'">check_circle_outline</mat-icon>
+                    <mat-icon *ngIf="order.status === 'New'">fiber_new</mat-icon>
+                </div>
+                <div class="col-lg-10">
+                    <span>From: {{order.date}}</span>
+                </div>
+            </div>      
+        </mat-panel-title>
+        <mat-panel-description >
+            Address: {{order.address}} <br>
+            Order ID: {{order._id}}
+        </mat-panel-description>
+    </mat-expansion-panel-header>
+    <div class="row">
+        <div class="col-lg-4">
+            <h3>Name: {{order.name}} {{order.lastName}}</h3>
+            <h3>Phone Number: {{ order.phoneNumber }}</h3>
+        </div>
+
+        <div class="col-lg-4">
+            <p *ngFor="let item of order.cart.items">
+            {{item.product.title}}  {{item.quantity}}x {{item.product.price | currency}}
+            </p>
+            <p>Additional Information: {{order.additionalInfo}}</p>
+        </div>
+
+        <div class="col-lg-4">
+            <h1>Total: {{ order.cart.totalPrice | currency }}</h1>
+            <div class="example-button-row">
+                <button 
+                *ngIf="order.status !== 'Finished'" 
+                mat-stroked-button 
+                (click)="finishOrderHandler(order._id)"
+                >
+                    Finish Order
+                </button>
+            </div>
+        </div>
+    </div>        
+</mat-expansion-panel>

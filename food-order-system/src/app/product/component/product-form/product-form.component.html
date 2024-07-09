@@ -1,0 +1,51 @@
+<h2 mat-dialog-title>Edit Product</h2>
+<div class="mb-3" style="text-align: center;">
+  <mat-dialog-content>
+    <form [formGroup]="productForm" class="needs-validation" (submit)="submitForm()">
+      <mat-form-field>
+        <mat-label>Title</mat-label>
+        <input matInput formControlName="title">
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Description</mat-label>
+        <input matInput formControlName="description">
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Price</mat-label>
+        <input matInput formControlName="price">
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Photo</mat-label>
+        <input matInput formControlName="photo">
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Category</mat-label>
+        <mat-select formControlName="category">
+          <mat-option *ngFor="let cat of categories$ | async" [value]="cat.category">{{ cat.category }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <div
+      class="alert alert-danger"
+      role="alert"
+      *ngIf="isFormSubmitted && isSubmitUnsuccessful"
+      >
+        Submit failed: {{ errorMessage }}
+      </div>
+    </form>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button mat-button mat-dialog-close>Close</button>
+    <button 
+    mat-button 
+    cdkFocusInitial
+    (click)="submitForm()"
+    >
+      Add Product
+    </button>
+    
+  </mat-dialog-actions>
+</div>

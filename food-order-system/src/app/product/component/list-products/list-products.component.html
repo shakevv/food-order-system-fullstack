@@ -1,0 +1,37 @@
+<section class="food_section layout_padding-bottom bg-img-none" style="background-color: aliceblue;">
+  <div class="container">
+    <div class="heading_container heading_center">
+      <h2>
+        Our Menu
+      </h2>
+    </div>
+
+    <app-list-categories 
+    (getProductsByCategory)="getByCategoryHandler($event)"
+    >
+    </app-list-categories>
+
+    <button 
+    *ngIf="userStorageService.isLoggedIn()"
+    (click)="openDialog()"
+    >
+      <mat-icon class="hero_btn" viewBox="0 0 456.029 456.029" style="enable-background:new 0 0 456.029 456.029;">add</mat-icon>                        
+    </button> 
+    
+    <div class="filters-content">
+      <div *ngIf="products$|async as products" class="row grid">
+        <div *ngFor="let product of products; trackBy: identify; let i = index" class="col-sm-6 col-lg-4 all pizza">
+          <app-product-item 
+          [product]="product"
+          (deleteProductEvt)="deleteHandler($event)"
+          >
+          </app-product-item>
+        </div>  
+        <ng-container *ngIf="products.length === 0">
+          <h1 style="text-align: center;">No Products</h1>
+        </ng-container>   
+      </div>   
+       
+    </div>
+  </div>
+</section>

@@ -1,0 +1,31 @@
+<ng-container *ngIf="categories$ | async as categories" >
+    <ul class="filters_menu">
+        <li 
+        *ngFor="let cat of categories; trackBy: identify" 
+        (click)="getProductsFromCategory(cat)" 
+        [class.active]="activeCategory === cat.category"
+        >
+            {{cat.category | titlecase}}
+            <a mat-mini-fab
+            *ngIf="userStorageService.isLoggedIn()"
+            (click)="deleteCategory(cat._id)"
+            >
+                <mat-icon>clear</mat-icon>
+            </a>
+        </li>
+        <li>
+            <button 
+            *ngIf="userStorageService.isLoggedIn()"
+            (click)="openDialog()"
+            >
+                <mat-icon 
+                class="hero_btn" 
+                viewBox="0 0 456.029 456.029" 
+                style="enable-background:new 0 0 456.029 456.029;"
+                >
+                    add
+                </mat-icon>                        
+            </button> 
+        </li>
+    </ul>
+</ng-container>

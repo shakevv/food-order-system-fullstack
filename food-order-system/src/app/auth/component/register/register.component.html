@@ -1,0 +1,82 @@
+<!-- <app-navigation></app-navigation> -->
+
+<div class="d-flex justify-content-center py-4" style="margin-top:100px;"> 
+  <form #registerForm="ngForm" (ngSubmit)="formSubmitHandler()">
+    <h1 class="h3 mb-3 fw-normal" style="text-align: center;">Create User</h1>
+
+    <div class="form-floating">
+      <input 
+        type="email"
+        class="form-control" 
+        id="floatingInput" 
+        placeholder="name@example.com" 
+        name="email" 
+        #emailControl="ngModel" 
+        ngModel 
+        email 
+        required
+        >
+      <label for="floatingInput">Email address</label>
+    </div>
+
+    <div class="form-floating">
+      <input 
+      type="password" 
+      class="form-control" 
+      id="floatingPassword" 
+      placeholder="Password" 
+      name="password" 
+      #passwordControl="ngModel" 
+      ngModel 
+      required
+      minlength="6"
+      >
+      <label for="floatingPassword">Password</label>
+    </div>
+
+    <div class="form-floating">
+      <input 
+      type="password" 
+      class="form-control" 
+      id="floatingRepeatPassword" 
+      placeholder="Repeat password" 
+      name="repeat Password" 
+      #repeatPasswordControl="ngModel" 
+      ngModel 
+      required
+      minlength="6"
+      >
+      <label for="floatingRepeatPassword">Repeat password</label>
+
+      <div
+        class="alert alert-danger"
+        role="alert"
+        *ngIf="passwordControl.errors && registerForm.submitted"
+        class="invalid-feedback"
+        >
+        <div *ngIf="passwordControl.errors['required']">
+          Password is required
+        </div>
+        <div *ngIf="passwordControl.errors['minlength']">
+          Password must be at least 6 characters
+        </div>
+        <div *ngIf="passwordControl.value !== repeatPasswordControl.value">
+          Passwords don't match
+        </div>
+      </div>
+    </div>
+    <button class="btn btn-primary w-100 py-2" type="submit">Sign up</button>
+      <div class="form-group">
+      <div
+        class="alert alert-danger"
+        role="alert"
+        *ngIf="registerForm.submitted && isRegisterFailed"
+      >
+        Register failed: {{ errorMessage }}
+      </div>
+    </div>
+    <div *ngIf="isRegisterSuccessful" class="alert alert-success" role="alert">
+      User account created successfully
+    </div>
+  </form>
+</div>

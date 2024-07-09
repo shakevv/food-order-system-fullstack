@@ -1,0 +1,57 @@
+<header>
+  <nav class="navbar navbar-expand-lg bg-black fixed-top custom_nav-container ">
+    <a class="navbar-brand" href="#">
+      <span>
+        Feane
+      </span>
+    </a>
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse"
+      data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" 
+      aria-expanded="false" aria-label="Toggle navigation">
+      <span class=""> </span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul  class="navbar-nav  mx-auto ">
+        <li class="nav-item">
+          <a href="/home" class="nav-link">Home</a>  
+        </li>    
+
+        <li class="nav-item">
+          <a href="#menu" class="nav-link">Menu</a> 
+        </li>
+
+        <li class="nav-item">
+          <a href="#about" class="nav-link">About</a> 
+        </li>
+      
+        <li *ngIf="userStorageService.isLoggedIn()" class="nav-item">
+          <a routerLink="/orders" class="nav-link">Orders</a> 
+        </li>
+
+        <li *ngIf="userStorageService.isLoggedIn()" class="nav-item">
+          <a routerLink="/manage-users" class="nav-link">Manage Users</a> 
+        </li>
+      </ul>
+
+      <div class="user_option">
+        <app-cart-status *ngIf="!userStorageService.isLoggedIn()"></app-cart-status>
+
+        <ng-container *ngIf="!userStorageService.isLoggedIn()">           
+          <a routerLink="/login" class="order_online">
+            Login
+          </a>             
+        </ng-container>
+
+        <ng-container *ngIf="userStorageService.isLoggedIn()">
+          <a (click)="logout()" class="order_online">
+            Logout
+          </a>
+        </ng-container>
+      </div>
+
+    </div>
+
+  </nav>
+</header>

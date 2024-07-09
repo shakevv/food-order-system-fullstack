@@ -1,0 +1,41 @@
+<ng-container *ngIf="product">
+  <div class="box">
+    <div>
+      <div class="img-box">
+          <img [src]="product.photo" alt="">
+      </div>
+      <div class="detail-box">
+          <h5>
+            {{ product.title }}
+          </h5>
+          
+          <p>
+            {{ product.description }}                 
+          </p>
+
+          <div class="options">
+          <h6>
+            {{ product.price | currency: 'USD'}}
+          </h6>
+            <div class="options" style="display: flex; justify-content: space-between;">
+
+              <a mat-mini-fab
+              *ngIf="userStorageService.isLoggedIn()"
+              (click)="deleteProduct(product._id)"
+              >
+                <mat-icon>delete</mat-icon>
+              </a>
+
+              <a mat-mini-fab
+              *ngIf="!userStorageService.isLoggedIn()" 
+              (click)="addToCart(product)"
+              >
+              <mat-icon>shopping_cart</mat-icon>                    
+              </a>
+
+            </div>                  
+          </div>
+      </div>
+    </div>
+  </div>
+</ng-container>
